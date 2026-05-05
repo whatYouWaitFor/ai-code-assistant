@@ -9,14 +9,14 @@ import dev.langchain4j.mcp.client.transport.http.StreamableHttpMcpTransport;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+//@Configuration
 public class McpConfig {
 
     @Bean
     public McpToolProvider mcpToolProvider() {
         // 和MCP建立通讯
         McpTransport transport = StreamableHttpMcpTransport.builder()
-                // 输入MCP服务商提供的sse地址
+                // 输入MCP服务商提供的sse地址,使用SSE的方式调用MCP
                 .url("http://localhost:3001/mcp")
                 .logRequests(true) // if you want to see the traffic in the log
                 .logResponses(true)

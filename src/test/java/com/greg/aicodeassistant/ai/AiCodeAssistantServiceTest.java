@@ -4,6 +4,7 @@ import dev.langchain4j.service.Result;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import reactor.core.publisher.Flux;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -57,6 +58,12 @@ class AiCodeAssistantServiceTest {
     void chatWithTool() {
         String chat = aiCodeAssistantService.chat("What is the square root of 475695037565");
         System.out.println(chat);
+    }
+
+    @Test
+    void chatWithStream() {
+        Flux<String> result = aiCodeAssistantService.chatWitStream(1, "What is the square root of 475695037565");
+        System.out.println(result);
     }
 
 }

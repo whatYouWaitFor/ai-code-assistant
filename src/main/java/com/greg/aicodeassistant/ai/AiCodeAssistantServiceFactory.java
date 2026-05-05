@@ -7,6 +7,7 @@ import dev.langchain4j.mcp.McpToolProvider;
 import dev.langchain4j.memory.ChatMemory;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
 import dev.langchain4j.model.chat.ChatModel;
+import dev.langchain4j.model.chat.StreamingChatModel;
 import dev.langchain4j.model.chat.request.ResponseFormat;
 import dev.langchain4j.model.chat.request.ResponseFormatType;
 import dev.langchain4j.model.chat.request.json.JsonObjectSchema;
@@ -23,27 +24,33 @@ public class AiCodeAssistantServiceFactory {
     @Resource
     private ChatModel qwenChatModel;
 
+    @Resource
+    private StreamingChatModel qwenStreamingChatModel;
+
     //@Resource
     //private ChatModel myQwenChatModel;
 
     @Resource
     private ContentRetriever contentRetriever;
 
+    //@Resource
     private McpToolProvider mcpToolProvider;
 
     @Bean
     public AiCodeAssistantService create() {
         AiCodeAssistantService aiCodeAssistantService = AiServices.builder(AiCodeAssistantService.class)
-                .chatModel(qwenChatModel)
+                .streamingChatModel(qwenStreamingChatModel)
+                //.chatModel(qwenChatModel)
+                // 绑定请求守护
                 //.inputGuardrails(new SafeInputGuardrail())
-                // 会话记忆，最多保持10条消息
+                // 每个会话独立存储，最多保持10条消息
                 .chatMemoryProvider(memoryId -> MessageWindowChatMemory.withMaxMessages(10))
                 // RAG检索增强生成
-                //.contentRetriever(contentRetriever)
+                .contentRetriever(contentRetriever)
                 // 绑定工具
-                //.tools(new MyMathTool())
+                .tools(new MyMathTool())
                 // mcp工具调用
-                .toolProvider(mcpToolProvider)
+                //.toolProvider(mcpToolProvider)
                 .build();
         return aiCodeAssistantService;
     }

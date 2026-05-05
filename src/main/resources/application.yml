@@ -4,10 +4,11 @@ spring:
   profiles:
     active: local
 
-
 langchain4j:
   community:
     dashscope:
+      streaming-chat-model:
+        model-name: qwen3.5-plus-2026-02-15
       chat-model:
         #model-name: qwen3.5-plus
         model-name: qwen3.5-plus-2026-02-15
@@ -17,3 +18,7 @@ langchain4j:
         #model-name: tongyi-embedding-vision-plus-2026-03-06
         model-name: text-embedding-v4
         #base-url: https://dashscope.aliyuncs.com/api/v1/services/embeddings/multimodal-embedding/multimodal-embedding
+server:
+  port: 8080
+  servlet:
+    context-path: /api

@@ -5,11 +5,14 @@ import dev.langchain4j.service.MemoryId;
 import dev.langchain4j.service.Result;
 import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.service.UserMessage;
-import dev.langchain4j.service.V;
 import dev.langchain4j.service.guardrail.InputGuardrails;
+import reactor.core.publisher.Flux;
 
 import java.util.List;
 
+/**
+ * AI Service方式
+ */
 @InputGuardrails({SafeInputGuardrail.class})
 public interface AiCodeAssistantService {
 
@@ -52,4 +55,7 @@ public interface AiCodeAssistantService {
      */
     @SystemMessage(fromResource = "system-prompt.txt")
     Result<String> chatWithRag(String userMessage);
+
+    @SystemMessage(fromResource = "system-prompt.txt")
+    Flux<String> chatWitStream(@MemoryId int memoryId, @UserMessage String userMessage);
 }
