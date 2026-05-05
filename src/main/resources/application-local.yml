@@ -1,0 +1,7 @@
+langchain4j:
+  community:
+    dashscope:
+      chat-model:
+        api-key: sk-e295bc494be1464c8041acda1a1cb74a
+      embedding-model:
+        api-key: sk-e295bc494be1464c8041acda1a1cb74a
