@@ -57,5 +57,5 @@ public interface AiCodeAssistantService {
     Result<String> chatWithRag(String userMessage);
 
     @SystemMessage(fromResource = "system-prompt.txt")
-    Flux<String> chatWitStream(@MemoryId int memoryId, @UserMessage String userMessage);
+    Flux<String> chatWitStream(@MemoryId long memoryId, @UserMessage String userMessage);
 }

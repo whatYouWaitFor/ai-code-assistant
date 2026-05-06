@@ -16,12 +16,12 @@ public class AiController {
     private AiCodeAssistantService aiCodeAssistantService;
 
     @GetMapping("/chat")
-    public Flux<String> chat(int memoryId, String userMessage) {
+    public Flux<String> chat(long memoryId, String userMessage) {
         return aiCodeAssistantService.chatWitStream(memoryId, userMessage);
     }
 
 //    @GetMapping("/chat")
-//    public Flux<ServerSentEvent<String>> chat(int memoryId, String userMessage) {
+//    public Flux<ServerSentEvent<String>> chat(long memoryId, String userMessage) {
 //        return aiCodeAssistantService.chatWitStream(memoryId, userMessage)
 //                .map(chunk -> ServerSentEvent.<String>builder().data(chunk).build());
 //    }
